@@ -2,7 +2,8 @@
     <div class="vue-parallax">
         <global-events
             target="window"
-            @scroll="handleScroll"
+            @scroll="setBaseValues"
+            @resize="setBaseValues"
         />
 
         <div
@@ -41,7 +42,11 @@
 
         data() {
             return {
-                throughPercent: 0,
+                boundingClientRect: {
+                    top: 0,
+                    height: 0,
+                },
+                windowInnerHeight: 0,
             };
         },
 
@@ -53,20 +58,37 @@
             bottom() {
                 return `calc(${ -this.throughPercent } * ${ this.distance })`;
             },
+
+            throughPercent() {
+                const { top, height } = this.boundingClientRect;
+                const startParallax = this.windowInnerHeight;
+                const endParallax = -height;
+                const throughHeight = startParallax - endParallax;
+                const through = height + endParallax + (startParallax - top);
+
+                return through / throughHeight;
+            },
+        },
+
+        watch: {
+            distance: {
+                immediate: true,
+
+                async handler() {
+                    await this.$nextTick();
+
+                    this.setBaseValues();
+                },
+            },
         },
 
         methods: {
             /**
-             * Set the scroll needed based on how far the component has passed
-             * through the window
+             * Set the non-reactive values
              */
-            handleScroll() {
-                const { top, height } = this.$el.getBoundingClientRect();
-                const startParallax = window.innerHeight;
-                const endParallax = -height;
-                const throughHeight = startParallax - endParallax;
-                const through = height + endParallax + (startParallax - top);
-                this.throughPercent = through / throughHeight;
+            setBaseValues() {
+                this.boundingClientRect = this.$el.getBoundingClientRect();
+                this.windowInnerHeight = window.innerHeight;
             },
         },
     };
