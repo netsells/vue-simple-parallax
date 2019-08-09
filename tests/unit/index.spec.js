@@ -12,6 +12,18 @@ describe('VueParallax', () => {
         expect(VueParallax.name).toBe('vue-parallax');
     });
 
+    describe('default props', () => {
+        let wrapper;
+
+        beforeEach(() => {
+            wrapper = mount(VueParallax);
+        });
+
+        it('has a default distance of 300px', () => {
+            expect(wrapper.vm.distance).toBe('300px');
+        });
+    });
+
     describe('when mounted', () => {
         let wrapper;
         let mockRect;

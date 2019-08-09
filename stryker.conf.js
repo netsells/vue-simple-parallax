@@ -9,6 +9,11 @@ module.exports = function(config) {
       // config: require('path/to/your/custom/jestConfig.js')
     },
     reporters: ["progress", "clear-text", "html"],
-    coverageAnalysis: "off"
+    coverageAnalysis: "off",
+    thresholds: {
+      high: 100,
+      low: 100,
+      break: 100,
+    },
   });
 };
