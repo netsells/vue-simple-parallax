@@ -9,15 +9,22 @@
     "test:unit": "vue-cli-service test:unit",
     "test:mutate": "stryker run",
     "codecov": "codecov",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "Sam Boylett <sam.boylett@netsells.co.uk>",
   "peerDependencies": {
     "vue": "^2.6.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
+    "@storybook/addon-actions": "^5.1.10",
+    "@storybook/addon-links": "^5.1.10",
+    "@storybook/addons": "^5.1.10",
+    "@storybook/vue": "^5.1.10",
     "@stryker-mutator/core": "^1.1.1",
     "@stryker-mutator/html-reporter": "^1.1.1",
     "@stryker-mutator/javascript-mutator": "^1.1.1",
@@ -31,9 +38,13 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.6",
+    "babel-preset-vue": "^2.0.2",
     "codecov": "^3.2.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
     "vue": "^2.6.6",
     "vue-template-compiler": "^2.5.21"
   },
