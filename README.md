@@ -4,9 +4,32 @@
 
 # Vue Parallax
 
-Vertical scrolling parallax background component
+A super simple, fully unit tested, vertical scrolling parallax background component
 
 ## Installation
 ```
 yarn add @netsells/vue-parallax
+```
+
+## Usage
+
+```javascript
+import VueParallax from '@netsells/vue-parallax';
+
+export default {
+    components: {
+        VueParallax,
+    },
+};
+```
+
+```html
+<template>
+    <vue-parallax>
+        <div slot="background" style="background: linear-gradient(red, green, blue)" />
+        <div>
+            Your foreground
+        </div>
+    </vue-parallax>
+</template>
 ```
