@@ -24,6 +24,15 @@ describe('VueParallax', () => {
         });
     });
 
+    describe('default data', () => {
+        it('has a default boundingClientRect top and height of 0', () => {
+            expect(VueParallax.data().boundingClientRect).toEqual({
+                top: 0,
+                height: 0,
+            });
+        });
+    });
+
     describe('when mounted', () => {
         let wrapper;
         let mockRect;
