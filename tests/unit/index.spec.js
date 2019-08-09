@@ -8,6 +8,10 @@ describe('VueParallax', () => {
         expect(VueParallax).toBeTruthy();
     });
 
+    it('is named correctly', () => {
+        expect(VueParallax.name).toBe('vue-parallax');
+    });
+
     describe('when mounted', () => {
         let wrapper;
         let mockRect;
@@ -25,6 +29,11 @@ describe('VueParallax', () => {
 
             jest.spyOn(wrapper.vm.$el, 'getBoundingClientRect')
                 .mockImplementation(() => mockRect);
+        });
+
+        it('sets base values immediately', () => {
+            expect(wrapper.vm.windowInnerHeight).toBe(1000);
+            expect(wrapper.vm.boundingClientRect).toEqual(mockRect);
         });
 
         describe('on scroll', () => {
@@ -55,6 +64,24 @@ describe('VueParallax', () => {
 
             it('sets the base values', () => {
                 expect(wrapper.vm.windowInnerHeight).toBe(40);
+                expect(wrapper.vm.boundingClientRect).toEqual(mockRect);
+            });
+        });
+
+        describe('on distance changed', () => {
+            beforeEach(() => {
+                mockRect = {
+                    top: 20,
+                    height: 40,
+                };
+                Object.assign(window, { innerHeight: 80 });
+                wrapper.setProps({
+                    distance: '500px',
+                });
+            });
+
+            it('sets the base values', () => {
+                expect(wrapper.vm.windowInnerHeight).toBe(80);
                 expect(wrapper.vm.boundingClientRect).toEqual(mockRect);
             });
         });
